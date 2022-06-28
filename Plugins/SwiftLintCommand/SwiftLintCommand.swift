@@ -18,5 +18,13 @@ struct SwiftLintCommand: CommandPlugin {
         args += ["--in-process-sourcekit", "--strict"]
         let process = try Process.run(swiftlint, arguments: args)
         process.waitUntilExit()
+        
+        if process.terminationReason == .exit && process.terminationStatus == 0 {
+            print("Lint checks passed")
+        }
+        else {
+            let problem = "\(process.terminationReason):\(process.terminationStatus)"
+            Diagnostics.error("Linting error: \(problem)")
+        }
     }
 }
