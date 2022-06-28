@@ -11,6 +11,7 @@ struct SwiftLintPlugin: BuildToolPlugin {
                 executable: try context.tool(named: "swiftlint").path,
                 arguments: [
                     "lint",
+                    "--strict",
                     "--in-process-sourcekit",
                     "--path",
                     target.directory.string
