@@ -15,7 +15,7 @@ struct SwiftLintCommand: CommandPlugin {
         let swiftlintPath = try context.tool(named: "swiftlint").path
         let swiftlint = URL(fileURLWithPath: swiftlintPath.string)
         var args = arguments
-        args += ["--in-process-sourcekit"]
+        args += ["--in-process-sourcekit", "--strict"]
         let process = try Process.run(swiftlint, arguments: args)
         process.waitUntilExit()
     }
